@@ -1,9 +1,9 @@
-name: Build and Deploy Spring Boot App to Azure
+name: Build and Deploy Spring Boot App using Azure CLI
 
 on:
   push:
     branches:
-      - main  # or your main branch
+      - main
 
 jobs:
   build-and-deploy:
@@ -22,9 +22,15 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
+      - name: Azure Login
+        uses: azure/login@v1
         with:
-          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
-          package: target/*.jar
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure App Service using Azure CLI
+        run: |
+          az webapp deploy \
+            --resource-group LoanCalcGroup \
+            --name rolva-loanapp \
+            --type jar \
+            --src-path target/LoanCalculatorApp-1.0.0.jar
