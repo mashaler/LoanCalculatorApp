@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Interest Calculator</title>
+</head>
+<body>
+<h2>Loan Interest Calculator</h2>
+
+<label>Principal Amount (R):</label>
+<input type="number" id="principal" /><br><br>
+
+<label>Months:</label>
+<input type="number" id="months" /><br><br>
+
+<button onclick="calculate()">Calculate</button>
+
+<h3>Result:</h3>
+<div id="result"></div>
+
+<script>
+    async function calculate() {
+      const principal = document.getElementById('principal').value;
+      const months = document.getElementById('months').value;
+
+      const response = await fetch(`http://localhost:8080/api/loan/calculate?principal=${principal}&months=${months}`);
+      const data = await response.json();
+
+      document.getElementById('result').innerHTML = `
+        <p><strong>Initial Amount:</strong> R${data.principal}</p>
+        <p><strong>Duration:</strong> ${data.months} months</p>
+        <p><strong>Total After ${data.months} Months:</strong> R${data.totalAmount}</p>
+        <p><strong>Profit Made:</strong> R${data.profit}</p>
+      `;
+    }
+</script>
+</body>
+</html>
