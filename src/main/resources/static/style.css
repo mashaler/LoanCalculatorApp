@@ -80,3 +80,10 @@ button:hover {
     color: var(--btn-bg);
     margin-top: -10px;
 }
+#error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
