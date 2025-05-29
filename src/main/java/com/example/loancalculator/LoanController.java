@@ -13,6 +13,13 @@ public class LoanController {
             @RequestParam double principal,
             @RequestParam int months
     ) {
+        if (principal <= 0) {
+            throw new IllegalArgumentException("Principal must be greater than 0");
+        }
+        if (months <= 0) {
+            throw new IllegalArgumentException("Months must be greater than 0");
+        }
+
         double monthlyRate = 0.30;
         double totalAmount = principal * Math.pow(1 + monthlyRate, months);
         double profit = totalAmount - principal;

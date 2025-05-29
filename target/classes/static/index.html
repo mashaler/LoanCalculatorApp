@@ -26,26 +26,39 @@
 
 <script>
     async function calculate() {
-      const principal = document.getElementById('principal').value;
-      const months = document.getElementById('months').value;
+    const principal = parseFloat(document.getElementById('principal').value);
+    const months = parseInt(document.getElementById('months').value);
 
-      const response = await fetch(`http://localhost:8080/api/loan/calculate?principal=${principal}&months=${months}`);
-      const data = await response.json();
-
-      document.getElementById('result').innerHTML = `
-        <p><strong>Initial Amount:</strong> R${data.principal}</p>
-        <p><strong>Duration:</strong> ${data.months} months</p>
-        <p><strong>Total After ${data.months} Months:</strong> R${data.totalAmount}</p>
-        <p><strong>Profit Made:</strong> R${data.profit}</p>
-      `;
+    if (isNaN(principal) || principal <= 0) {
+        alert("Please enter a valid principal amount greater than 0.");
+        return;
+    }
+    if (isNaN(months) || months <= 0) {
+        alert("Please enter a valid number of months greater than 0.");
+        return;
     }
 
-    // Theme toggle
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const toggleText = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
-      document.getElementById('theme-toggle').innerText = toggleText;
-    });
+    try {
+        const response = await fetch(`http://localhost:8080/api/loan/calculate?principal=${principal}&months=${months}`);
+        if (!response.ok) {
+            const errorMsg = await response.text();
+            alert("Error: " + errorMsg);
+            return;
+        }
+
+        const data = await response.json();
+
+        document.getElementById('result').innerHTML = `
+          <p><strong>Initial Amount:</strong> R${data.principal}</p>
+          <p><strong>Duration:</strong> ${data.months} months</p>
+          <p><strong>Total After ${data.months} Months:</strong> R${data.totalAmount}</p>
+          <p><strong>Profit Made:</strong> R${data.profit}</p>
+        `;
+    } catch (error) {
+        alert("An unexpected error occurred. Please try again.");
+        console.error(error);
+    }
+}
 </script>
 </body>
 </html>
