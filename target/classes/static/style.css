@@ -80,10 +80,80 @@ button:hover {
     color: var(--btn-bg);
     margin-top: -10px;
 }
+
 #error-message {
     background-color: #f8d7da;
     color: #721c24;
     padding: 10px 15px;
     border: 1px solid #f5c6cb;
     border-radius: 5px;
+}
+
+.auth-form {
+    max-width: 400px;
+    margin: 0 auto 30px auto;
+    background-color: var(--input-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+}
+
+.auth-form label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: white;
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+.auth-form button {
+    margin-top: 20px;
+}
+
+a {
+    color: var(--btn-bg);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Password visibility toggle */
+.password-field {
+    position: relative;
+}
+
+.password-field input[type="password"],
+.password-field input[type="text"] {
+    width: 100%;
+    padding-right: 200px;
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--btn-bg);
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.password-toggle-btn:hover {
+    color: var(--btn-hover);
 }

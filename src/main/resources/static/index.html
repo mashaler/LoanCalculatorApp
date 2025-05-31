@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Loan Interest Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <h2>
@@ -13,66 +12,19 @@
 </h2>
 
 <label>Principal Amount (R):</label>
-<input type="number" id="principal" required/>
+<input type="number" id="principal" required />
 <small>Note: A fixed 30% monthly compound interest is applied to your loan.</small>
 
 <label>Months:</label>
-<input type="number" id="months" required/>
+<input type="number" id="months" required />
 
-<button onclick="calculate()">Calculate</button>
+<button id="calculate-btn">Calculate</button>
 
-<div id="error-message" style="display: none; color: red; margin-bottom: 20px;"></div>
+<div id="error-message" style="display:none;"></div>
 
 <h3>Result:</h3>
 <div id="result"></div>
 
-<script>
-    async function calculate() {
-    const errorDiv = document.getElementById('error-message');
-    errorDiv.style.display = 'none';
-    errorDiv.innerText = '';
-
-    const principal = parseFloat(document.getElementById('principal').value);
-    const months = parseInt(document.getElementById('months').value);
-
-    // 🔒 Frontend validation
-    if (isNaN(principal) || principal <= 0) {
-        showError("Please enter a valid principal amount greater than 0.");
-        return;
-    }
-    if (isNaN(months) || months <= 0) {
-        showError("Please enter a valid number of months greater than 0.");
-        return;
-    }
-
-    try {
-        const response = await fetch(`http://localhost:8080/api/loan/calculate?principal=${principal}&months=${months}`);
-
-        if (!response.ok) {
-            const errorMsg = await response.text();
-            showError("Error: " + errorMsg);
-            return;
-        }
-
-        const data = await response.json();
-
-        document.getElementById('result').innerHTML = `
-          <p><strong>Initial Amount:</strong> R${data.principal}</p>
-          <p><strong>Duration:</strong> ${data.months} months</p>
-          <p><strong>Total After ${data.months} Months:</strong> R${data.totalAmount}</p>
-          <p><strong>Profit Made:</strong> R${data.profit}</p>
-        `;
-    } catch (error) {
-        showError("Unexpected error. Please try again.");
-        console.error(error);
-    }
-}
-
-function showError(message) {
-    const errorDiv = document.getElementById('error-message');
-    errorDiv.innerText = message;
-    errorDiv.style.display = 'block';
-}
-</script>
+<script src="script.js"></script>
 </body>
 </html>
