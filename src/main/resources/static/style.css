@@ -166,3 +166,17 @@ a:hover {
     align-items: center;
     justify-content: center;
 }
+#calculate-btn {
+  width: auto;
+  padding: 12px 24px;
+  background-color: var(--btn-bg);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#calculate-btn:hover {
+  background-color: var(--btn-hover);
+}

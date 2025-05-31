@@ -24,7 +24,7 @@ body {
     max-width: 500px;
     margin: auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
@@ -48,19 +48,13 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
-button {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--btn-bg);
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+a {
+    color: var(--btn-bg);
+    text-decoration: none;
 }
 
-button:hover {
-    background-color: var(--btn-hover);
+a:hover {
+    text-decoration: underline;
 }
 
 #result {
@@ -71,6 +65,15 @@ button:hover {
     border-radius: 5px;
 }
 
+#error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}
+
+/* Theme toggle button */
 #theme-toggle {
     float: right;
     cursor: pointer;
@@ -81,21 +84,14 @@ button:hover {
     margin-top: -10px;
 }
 
-#error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px 15px;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
-}
-
+/* Auth form wrapper */
 .auth-form {
     max-width: 400px;
     margin: 0 auto 30px auto;
     background-color: var(--input-bg);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
 }
 
 .auth-form label {
@@ -115,34 +111,46 @@ button:hover {
     box-sizing: border-box;
 }
 
-.auth-form button {
+/* Submit button only */
+.auth-form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--btn-bg);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     margin-top: 20px;
 }
 
-a {
-    color: var(--btn-bg);
-    text-decoration: none;
+.auth-form button[type="submit"]:hover {
+    background-color: var(--btn-hover);
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-/* Password visibility toggle */
+/* Password input field container */
 .password-field {
     position: relative;
 }
 
+/* Password input styles */
 .password-field input[type="password"],
 .password-field input[type="text"] {
     width: 100%;
-    padding-right: 200px;
+    padding: 10px;
+    padding-right: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
+/* Toggle button for password visibility */
 .password-toggle-btn {
     position: absolute;
-    right: 10px;
     top: 50%;
+    right: 10px;
     transform: translateY(-50%);
     background: none;
     border: none;
@@ -152,8 +160,23 @@ a:hover {
     padding: 0;
     margin: 0;
     line-height: 1;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#calculate-btn {
+  width: auto;
+  padding: 12px 24px;
+  background-color: var(--btn-bg);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.password-toggle-btn:hover {
-    color: var(--btn-hover);
+#calculate-btn:hover {
+  background-color: var(--btn-hover);
 }
